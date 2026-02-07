@@ -9,7 +9,7 @@ app.set('port', process.env.PORT || 3000)
 app.listen(app.get('port'),()=>{
     console.log(`Server on port, ${app.get('port')}`);
     console.log("environment",process.env.NODE_ENV);
-    console.log('Endpoint:', `localhost:${process.env.PORT}`)
+    console.log('Endpoint:', `http://localhost:${app.get('port')}`)
 })
 
 

@@ -70,7 +70,9 @@ const putClientes = async (req = request, res = response) => {
 
     // validar id
     if (!id) {
-      return res.status(400).json({ msg: "El id es obligatorio" });
+      return res.status(400).json({ 
+        msg: "El id es obligatorio" 
+      });
     }
 
     // obtener la informacion del cliente desde body
@@ -79,9 +81,11 @@ const putClientes = async (req = request, res = response) => {
     data.fechaActualizacion = Date.now();
 
     // opcional: validar que id sea un ObjectId válido (si usas mongoose)
-    const mongoose = require('mongoose');
+    const mongoose = require("mongoose");
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ msg: "Id inválido" });
+      return res.status(400).json({ 
+        msg: "Id inválido" 
+      });
     }
 
     const cliente = await Clientes.findByIdAndUpdate(id, data, { new: true });
@@ -97,8 +101,40 @@ const putClientes = async (req = request, res = response) => {
   }
 };
 
+const deleteClientes = async (req = request, res = response) => {
+  try {
+    const { id } = req.params;
+    
+
+    if (!id) {
+      return res.status(400).json({
+        msg: "El id es obligatorio",
+      });
+    }
+
+    const mongoose = require("mongoose");
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        msg: "Id inválido",
+      });
+    }
+
+    const cliente = await Clientes.findByIdAndDelete(id);
+    return res.json({
+      msg: "Cliente Eliminado",
+      cliente,
+    });
+  } catch (e) {
+    console.log(e);
+    return res.status(500).json({
+      msg: "Error del server: " + e,
+    });
+  }
+};
+
 module.exports = {
   getClientes,
   postClientes,
-  putClientes
+  putClientes,
+  deleteClientes,
 };
