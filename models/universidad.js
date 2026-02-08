@@ -1,17 +1,13 @@
 const { Schema, model } = require("mongoose");
 
-const clientesSchema = Schema({
+const universidadSchema = Schema({
   nombre: {
     type: String,
     required: [true, "El nombre es obligatorio"],
   },
-  apellido: {
+  direccion: {
     type: String,
-    required: [true, "El apellido es obligatorio"],
-  },
-  email: {
-    type: String,
-    required: [true, "El email es obligatorio"],
+    required: [true, "La direcion es obligatoria"],
   },
   telefono: {
     type: String,
@@ -27,4 +23,4 @@ const clientesSchema = Schema({
   },
 });
 
-module.exports = model("clientes", clientesSchema);
+module.exports = model("universidad", universidadSchema);

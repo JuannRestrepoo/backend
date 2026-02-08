@@ -70,8 +70,8 @@ const putClientes = async (req = request, res = response) => {
 
     // validar id
     if (!id) {
-      return res.status(400).json({ 
-        msg: "El id es obligatorio" 
+      return res.status(400).json({
+        msg: "El id es obligatorio",
       });
     }
 
@@ -83,8 +83,8 @@ const putClientes = async (req = request, res = response) => {
     // opcional: validar que id sea un ObjectId válido (si usas mongoose)
     const mongoose = require("mongoose");
     if (!mongoose.Types.ObjectId.isValid(id)) {
-      return res.status(400).json({ 
-        msg: "Id inválido" 
+      return res.status(400).json({
+        msg: "Id inválido",
       });
     }
 
@@ -104,7 +104,6 @@ const putClientes = async (req = request, res = response) => {
 const deleteClientes = async (req = request, res = response) => {
   try {
     const { id } = req.params;
-    
 
     if (!id) {
       return res.status(400).json({
