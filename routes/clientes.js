@@ -1,4 +1,3 @@
-console.log("✅ Cargando routes/clientes.js");
 const {Router} = require("express")
 
 const {

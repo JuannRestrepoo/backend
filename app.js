@@ -10,14 +10,12 @@ app.use(cors({
 }))
 
 const clientes = require ("./routes/clientes")
+const universidad = require("./routes/universidad")
 
 //ROUTES
 
 app.use ("/api/clientes", clientes)
-
-
-
-
+app.use ("/api/universidad", universidad)
 
 module.exports = app
 
