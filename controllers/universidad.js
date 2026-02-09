@@ -15,8 +15,8 @@ const getUniversidad = async (req = request, res = response) => {
 const postUniversidad = async (req = request, res = response) => {
   try {
     const nombre = req.body.nombre ? req.body.nombre.toUpperCase() : "";
-    const direccion = req.body.direccion ? req.body.direccion.toUpperCase(): "";
-    const telefono = req.body.telefono ;
+    const direccion = req.body.direccion ? req.body.direccion.toUpperCase() : "";
+    const telefono = req.body.telefono;
 
     if (!nombre || !direccion || !telefono) {
       return res.status(400).json({
@@ -58,7 +58,79 @@ const postUniversidad = async (req = request, res = response) => {
   }
 };
 
+const putClientes = async (req = request, res = response) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({
+        msg: "El id es obligatorio",
+      });
+    }
+
+    const data = { ...req.body };
+    data.nombre = data.nombre ? data.nombre.toUpperCase() : "";
+    data.direccion = data.direccion ? data.direccion.toUpperCase() : "";
+    data.fechaActualizacion = Date.now();
+
+    const mongoose = require("mongoose");
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        msg: "Id invalido",
+      });
+    }
+
+    const universidad = await Universidad.findByIdAndUpdate(id, data, { new: true });
+
+    if (!universidad) {
+      return res.status(404).json({ msg: "Universidad no encontrada" });
+    }
+
+    return res.json({ msg: "Universidad actualizada", universidad });
+  } catch (e) {
+    console.error(e);
+    return res.status(500).json({ msg: "Error del server: " + e });
+  }
+};
+
+const deleUniversidad = async (req = request, res = response) => {
+  try {
+    const { id } = req.params;
+
+    if (!id) {
+      return res.status(400).json({
+        msg: "El id es obligatorio",
+      });
+    }
+
+    const mongoose = require("mongoose");
+    if (!mongoose.Types.ObjectId.isValid(id)) {
+      return res.status(400).json({
+        msg: "Id invalido",
+      });
+    }
+
+    const universidad = await Universidad.findByIdAndDelete(id);
+
+    if (!universidad) {
+      return res.status(404).json({ msg: "Universidad no encontrada" });
+    }
+
+    return res.json({
+      msg: "Universidad eliminada",
+      universidad,
+    });
+  } catch (e) {
+    console.log(e);
+    return res.status(500).json({
+      msg: "Error del server: " + e,
+    });
+  }
+};
+
 module.exports = {
   getUniversidad,
   postUniversidad,
+  putClientes,
+  deleUniversidad,
 };
