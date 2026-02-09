@@ -186,13 +186,18 @@ Ejemplo de body:
 
 ### Proyectos
 Campos comunes sugeridos (ajústalos a tu modelo):
-- `nombre`
+- `numero`
+- `titulo`
 - `descripcion`
 - `estado` (ej: `pendiente | en_progreso | finalizado`)
-- `fechaInicio`, `fechaFin`
+- `fechaInicio`,
+- `fechaFin`
 - `clienteId`
 - `universidadId`
 - `tipoProyectoId`
+-  `etapaId`
+-  `fechaCreacion`
+-  `fechaActualizacion`
 
 Rutas sugeridas:
 - `GET    /api/proyectos`
@@ -220,6 +225,7 @@ Ejemplo de body para crear proyecto:
   "tipoProyectoId": 3
 }
 ```
+
 
 
 
