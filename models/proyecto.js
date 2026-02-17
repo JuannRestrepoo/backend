@@ -13,7 +13,7 @@ const proyectoSchema = Schema({
     type: String,
     required: [true, "El estado es obligatorio"],
   },
-fechaInicio: {
+  fechaInicio: {
     type: Date,
     default: Date.now,
   },
@@ -24,23 +24,22 @@ fechaInicio: {
     type: Date,
     default: Date.now,
   },
- 
+
   clientes: {
     type: Schema.Types.ObjectId,
-    ref: 'clientes', 
-    required: true
+    ref: "clientes",
+    required: true,
   },
   universidad: {
     type: Schema.Types.ObjectId,
-    ref: 'universidad', 
-    required: true
+    ref: "universidad",
+    required: true,
   },
   tipoProyecto: {
     type: Schema.Types.ObjectId,
-    ref: 'TipoProyecto',
-    required: true
-  }
+    ref: "TipoProyecto",
+    required: true,
+  },
 });
 
 module.exports = model("Proyecto", proyectoSchema);
-
