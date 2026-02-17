@@ -1,10 +1,17 @@
 const { Schema, model } = require("mongoose");
+const etapa = require("./etapa");
 
 const proyectoSchema = Schema({
-  nombre: {
+  numero: {
     type: String,
-    required: [true, "El nombre es obligatorio"],
+    required: [true, "El numero es obligatorio"],
   },
+
+  titulo: {
+  type: String,
+  required: [true, "El titulo es obligatorio"],
+  },
+
   descripcion: {
     type: String,
     required: [true, "La descripcion es obligatoria"],
@@ -25,21 +32,30 @@ const proyectoSchema = Schema({
     default: Date.now,
   },
 
-  clientes: {
+  clienteId: {
     type: Schema.Types.ObjectId,
     ref: "clientes",
     required: true,
   },
-  universidad: {
+  universidadId: {
     type: Schema.Types.ObjectId,
     ref: "universidad",
     required: true,
   },
-  tipoProyecto: {
+  tipoProyectoId: {
     type: Schema.Types.ObjectId,
     ref: "TipoProyecto",
     required: true,
   },
+  etapaId: {
+    type: Schema.Types.ObjectId,
+    ref: "etapa",
+    required: true,
+  },
+  fechaCreacion: {
+    type: Date,
+    default: Date.now,
+  },  
 });
 
 module.exports = model("Proyecto", proyectoSchema);
