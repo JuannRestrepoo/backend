@@ -1,9 +1,13 @@
 const { Schema, model } = require("mongoose");
 
 const proyectoSchema = Schema({
-  nombre: {
+  numero: {
     type: String,
-    required: [true, "El nombre es obligatorio"],
+    required: [true, "El numero es obligatorio"],
+  },
+  titulo: {
+    type: String,
+    required: [true, "El titulo es obligatorio"],
   },
   descripcion: {
     type: String,
@@ -20,24 +24,32 @@ const proyectoSchema = Schema({
   fechaFin: {
     type: Date,
   },
+  fechaCreacion: {
+    type: Date,
+    default: Date.now,
+  },
   fechaActualizacion: {
     type: Date,
     default: Date.now,
   },
-
-  clientes: {
+  clienteId: {
     type: Schema.Types.ObjectId,
     ref: "clientes",
     required: true,
   },
-  universidad: {
+  universidadId: {
     type: Schema.Types.ObjectId,
     ref: "universidad",
     required: true,
   },
-  tipoProyecto: {
+  tipoProyectoId: {
     type: Schema.Types.ObjectId,
     ref: "TipoProyecto",
+    required: true,
+  },
+  etapaId: {
+    type: Schema.Types.ObjectId,
+    ref: "etapa",
     required: true,
   },
 });
